@@ -120,3 +120,28 @@ Potential improvements include:
 ## 9. Design Limitations
 
 A diagram alone does not establish that an architecture is highly available. Availability must be verified through actual resource placement, health checks, failure handling, and recovery testing.
+
+## 10. Reliability and Failure Scenarios
+
+A highly available platform should be evaluated against common failure scenarios.
+
+| Scenario | Design consideration |
+|---|---|
+| Application instance failure | Health checks and replacement of unhealthy instances |
+| Availability Zone failure | Redundant resources across supported Availability Zones |
+| Database connectivity failure | Connection handling, timeouts, and recovery procedures |
+| Traffic spike | Capacity planning and scaling configuration |
+| Accidental infrastructure change | Terraform plan review and version-controlled changes |
+| Data loss | Backups and tested recovery procedures |
+
+### Verification Checklist
+
+- [ ] Confirm the intended subnet placement of each tier.
+- [ ] Verify that database access is restricted to approved sources.
+- [ ] Review load-balancer target health.
+- [ ] Confirm that redundant resources span the intended Availability Zones.
+- [ ] Review database backup and recovery configuration.
+- [ ] Test failure scenarios in a non-production environment.
+- [ ] Record findings and corrective actions.
+
+These items are verification tasks, not claims that the controls are already implemented. Mark each item complete only after testing the actual infrastructure.
