@@ -176,17 +176,17 @@ terraform destroy
 
 **Warning:** Destruction can permanently remove resources and data. Back up any required data and confirm the target AWS account and Terraform workspace before proceeding.
 
-## Future Improvements
+## Improvement Roadmap
 
-Potential enhancements, subject to implementation and testing:
+Potential improvements will be added after implementation and testing.
 
-- Automated Terraform checks with GitHub Actions
-- Architecture diagrams and deployment documentation
-- Improved IAM and security-group controls
-- Automated infrastructure testing
-- HTTPS support and certificate management
-- Monitoring, logging, and alerting
-- Cost optimization and resource cleanup automation
+- **Infrastructure validation:** run Terraform formatting and validation automatically.
+- **Network security:** verify subnet routing and restrict unnecessary inbound access.
+- **Reliability:** verify health checks, redundancy, and database recovery procedures.
+- **Observability:** introduce suitable metrics, logs, and alerts.
+- **Cost control:** document resource costs and environment cleanup.
+
+This roadmap describes possible future work, not features guaranteed to be deployed.
 
 ## Skills Demonstrated
 
