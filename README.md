@@ -208,3 +208,34 @@ GitHub: [@KaleeswarG25](https://github.com/KaleeswarG25)
 ## License
 
 Add a `LICENSE` file if you intend to publish this project under an open-source license.
+
+## Engineering Workflow
+
+Infrastructure changes should follow a consistent workflow to reduce deployment risk.
+
+1. Create a feature branch for the proposed change.
+2. Update the Terraform configuration.
+3. Run formatting and validation checks.
+4. Review the Terraform execution plan.
+5. Verify the expected resources and configuration changes.
+6. Apply changes only after reviewing the plan.
+7. Document the result and any operational considerations.
+
+### Validation Commands
+
+Run these commands from the Terraform project directory:
+
+```bash
+terraform fmt -check -recursive
+terraform init
+terraform validate
+terraform plan
+```
+
+### Operational Principles
+
+- Prefer small, reviewable infrastructure changes.
+- Keep credentials outside source control.
+- Review resource replacement and deletion before applying changes.
+- Use version control to track infrastructure modifications.
+- Clean up temporary environments when they are no longer needed.
