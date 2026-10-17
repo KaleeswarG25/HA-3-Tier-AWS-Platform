@@ -199,8 +199,29 @@ This project provides practical experience with:
 - Infrastructure validation and troubleshooting
 - Deployment documentation and cost awareness
 
-## Author
+## Troubleshooting
 
+### Terraform initialization fails
+
+- Check provider and module configuration.
+- Verify network connectivity and provider availability.
+- Review backend settings if remote state is configured.
+
+### AWS access is denied
+
+- Check the active AWS identity with `aws sts get-caller-identity`.
+- Verify that the identity has the required permissions.
+- Confirm that the CLI profile and region are correct.
+
+### The Terraform plan shows unexpected changes
+
+- Review variable values and resource dependencies.
+- Check for configuration drift.
+- Inspect resource replacements and deletions before applying.
+
+Never paste credentials, tokens, or sensitive Terraform state into public issues.
+
+## Author
 **Kaleeswar G**
 
 GitHub: [@KaleeswarG25](https://github.com/KaleeswarG25)
