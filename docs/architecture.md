@@ -121,27 +121,20 @@ Potential improvements include:
 
 A diagram alone does not establish that an architecture is highly available. Availability must be verified through actual resource placement, health checks, failure handling, and recovery testing.
 
-## 10. Reliability and Failure Scenarios
+## 10. Reliability Validation
 
-A highly available platform should be evaluated against common failure scenarios.
+Evaluate the infrastructure against realistic failure scenarios before describing it as highly available.
 
-| Scenario | Design consideration |
+| Scenario | What to verify |
 |---|---|
-| Application instance failure | Health checks and replacement of unhealthy instances |
-| Availability Zone failure | Redundant resources across supported Availability Zones |
-| Database connectivity failure | Connection handling, timeouts, and recovery procedures |
-| Traffic spike | Capacity planning and scaling configuration |
-| Accidental infrastructure change | Terraform plan review and version-controlled changes |
-| Data loss | Backups and tested recovery procedures |
+| Compute instance failure | Health checks and recovery behavior |
+| Availability Zone outage | Resource distribution and remaining capacity |
+| Database connectivity failure | Timeouts, connection recovery, and application behavior |
+| Unexpected traffic spike | Capacity limits and scaling configuration |
+| Accidental infrastructure change | Plan review and recovery procedure |
+| Data loss | Backup availability and restoration testing |
 
-### Verification Checklist
+Record the test, expected outcome, actual result, and corrective action.
 
-- [ ] Confirm the intended subnet placement of each tier.
-- [ ] Verify that database access is restricted to approved sources.
-- [ ] Review load-balancer target health.
-- [ ] Confirm that redundant resources span the intended Availability Zones.
-- [ ] Review database backup and recovery configuration.
-- [ ] Test failure scenarios in a non-production environment.
-- [ ] Record findings and corrective actions.
+Do not mark a scenario as passed until it has been tested. Actual resilience depends on the deployed resources and configuration.
 
-These items are verification tasks, not claims that the controls are already implemented. Mark each item complete only after testing the actual infrastructure.
