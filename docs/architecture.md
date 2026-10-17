@@ -69,16 +69,25 @@ Actual availability depends on the resources, redundancy, and recovery mechanism
 
 ## 5. Network Security
 
-Recommended network controls include:
+Network segmentation should limit which components can communicate with each other.
 
-- Public subnets only for components that require public reachability.
-- Private subnets for internal application and database resources.
-- Security-group rules restricted to necessary sources and ports.
-- Least-privilege IAM permissions.
-- No direct public access to the database.
-- Encryption for data in transit and at rest where supported.
+| Component | Security review |
+|---|---|
+| Public entry point | Expose only required listener ports |
+| Presentation tier | Allow only intended application traffic |
+| Application tier | Restrict inbound traffic to approved sources |
+| Database tier | Permit database access only from authorized application components |
+| Administration | Avoid unrestricted management access |
+| AWS APIs | Use appropriate IAM permissions and private endpoints where needed |
 
-These are design recommendations; verify each control in the Terraform configuration.
+### Verification
+
+- Review subnet route tables and network ACLs.
+- Check security-group ingress and egress rules.
+- Confirm that the database does not have unintended public exposure.
+- Validate IAM permissions against least-privilege requirements.
+
+These are design requirements to verify, not claims that every control is currently deployed.
 
 ## 6. Request Flow
 
