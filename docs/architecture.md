@@ -147,3 +147,16 @@ Record the test, expected outcome, actual result, and corrective action.
 
 Do not mark a scenario as passed until it has been tested. Actual resilience depends on the deployed resources and configuration.
 
+## 11. Change Management
+
+Infrastructure changes should be traceable and reviewable.
+
+1. Identify the resources affected by a proposed change.
+2. Update the relevant Terraform configuration.
+3. Run formatting and validation.
+4. Review the plan for unintended replacements or deletions.
+5. Apply the change only after approval.
+6. Verify the resulting infrastructure.
+7. Record the outcome and any follow-up work.
+
+Keep secrets and local Terraform state out of version control. Back up important data before destructive operations.
