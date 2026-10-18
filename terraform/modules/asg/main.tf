@@ -1,12 +1,12 @@
-variable "project"             { type = string }
-variable "private_subnets"     { type = list(string) }
-variable "target_group_arn"    { type = string }
-variable "app_sg_id"           { type = string }
-variable "instance_type"       { default = "t3.micro" }
-variable "min_size"            { default = 2 }
-variable "max_size"            { default = 6 }
-variable "desired_capacity"    { default = 2 }
-variable "userdata_path"       { type = string }
+variable "project" { type = string }
+variable "private_subnets" { type = list(string) }
+variable "target_group_arn" { type = string }
+variable "app_sg_id" { type = string }
+variable "instance_type" { default = "t3.micro" }
+variable "min_size" { default = 2 }
+variable "max_size" { default = 6 }
+variable "desired_capacity" { default = 2 }
+variable "userdata_path" { type = string }
 
 # ---- Latest Amazon Linux 2023 AMI ----
 data "aws_ami" "al2023" {
@@ -29,9 +29,9 @@ resource "aws_iam_role" "ec2" {
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [{
-      Effect = "Allow"
+      Effect    = "Allow"
       Principal = { Service = "ec2.amazonaws.com" }
-      Action = "sts:AssumeRole"
+      Action    = "sts:AssumeRole"
     }]
   })
 }
@@ -71,7 +71,7 @@ resource "aws_launch_template" "app" {
 
   tag_specifications {
     resource_type = "instance"
-    tags = { Name = "${var.project}-app" }
+    tags          = { Name = "${var.project}-app" }
   }
 
   lifecycle { create_before_destroy = true }
@@ -136,7 +136,7 @@ resource "aws_cloudwatch_metric_alarm" "cpu_high" {
   statistic           = "Average"
   threshold           = 70
   alarm_actions       = [aws_autoscaling_policy.scale_up.arn]
-  dimensions = { AutoScalingGroupName = aws_autoscaling_group.app.name }
+  dimensions          = { AutoScalingGroupName = aws_autoscaling_group.app.name }
 }
 
 resource "aws_cloudwatch_metric_alarm" "cpu_low" {
@@ -149,7 +149,7 @@ resource "aws_cloudwatch_metric_alarm" "cpu_low" {
   statistic           = "Average"
   threshold           = 20
   alarm_actions       = [aws_autoscaling_policy.scale_down.arn]
-  dimensions = { AutoScalingGroupName = aws_autoscaling_group.app.name }
+  dimensions          = { AutoScalingGroupName = aws_autoscaling_group.app.name }
 }
 
 output "asg_name" { value = aws_autoscaling_group.app.name }

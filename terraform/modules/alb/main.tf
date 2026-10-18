@@ -1,7 +1,7 @@
-variable "project"           { type = string }
-variable "vpc_id"            { type = string }
-variable "public_subnets"    { type = list(string) }
-variable "alb_sg_id"         { type = string }
+variable "project" { type = string }
+variable "vpc_id" { type = string }
+variable "public_subnets" { type = list(string) }
+variable "alb_sg_id" { type = string }
 
 resource "aws_lb" "this" {
   name               = "${var.project}-alb"
@@ -47,6 +47,6 @@ resource "aws_lb_listener" "http" {
   }
 }
 
-output "alb_arn"      { value = aws_lb.this.arn }
+output "alb_arn" { value = aws_lb.this.arn }
 output "alb_dns_name" { value = aws_lb.this.dns_name }
 output "target_group_arn" { value = aws_lb_target_group.app.arn }

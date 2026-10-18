@@ -1,7 +1,7 @@
-variable "project"          { type = string }
-variable "vpc_id"           { type = string }
-variable "vpc_cidr"         { type = string }
-variable "alb_sg_id"        { default = "" } # set below instead
+variable "project" { type = string }
+variable "vpc_id" { type = string }
+variable "vpc_cidr" { type = string }
+variable "alb_sg_id" { default = "" } # set below instead
 
 # ALB SG — internet → ALB:80
 resource "aws_security_group" "alb" {
