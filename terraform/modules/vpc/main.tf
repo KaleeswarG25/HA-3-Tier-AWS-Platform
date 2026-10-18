@@ -11,7 +11,8 @@ variable "azs" {
   }
 }
 
-variable "public_cidrs" {
+variable "publi_cidrs" {
+  
   description = "CIDR blocks for public subnets, one per Availability Zone."
   type        = list(string)
 
