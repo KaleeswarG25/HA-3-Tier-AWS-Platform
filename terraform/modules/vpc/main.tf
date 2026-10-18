@@ -1,14 +1,52 @@
-variable "project"     { type = string }
-variable "vpc_cidr"    { default = "10.0.0.0/16" }
-variable "azs"         { type = list(string) }
-variable "public_cidrs"  { type = list(string) }
-variable "private_cidrs" { type = list(string) }
+variable "project" { type = string }
+variable "vpc_cidr" { default = "10.0.0.0/16" }
+
+variable "azs" {
+  description = "Availability Zones used by the VPC subnets."
+  type        = list(string)
+
+  validation {
+    condition     = length(var.azs) >= 2 && length(distinct(var.azs)) == length(var.azs)
+    error_message = "Provide at least two distinct Availability Zones."
+  }
+}
+
+variable "public_cidrs" {
+  description = "CIDR blocks for public subnets, one per Availability Zone."
+  type        = list(string)
+
+  validation {
+    condition     = length(var.public_cidrs) == length(var.azs)
+    error_message = "The number of public subnet CIDRs must match the number of Availability Zones."
+  }
+
+  validation {
+    condition     = alltrue([for cidr in var.public_cidrs : can(cidrhost(cidr, 0))])
+    error_message = "Every public subnet CIDR must be valid."
+  }
+}
+
+variable "private_cidrs" {
+  description = "CIDR blocks for private subnets, one per Availability Zone."
+  type        = list(string)
+
+  validation {
+    condition     = length(var.private_cidrs) == length(var.azs)
+    error_message = "The number of private subnet CIDRs must match the number of Availability Zones."
+  }
+
+  validation {
+    condition     = alltrue([for cidr in var.private_cidrs : can(cidrhost(cidr, 0))])
+    error_message = "Every private subnet CIDR must be valid."
+  }
+}
+
 
 resource "aws_vpc" "this" {
   cidr_block           = var.vpc_cidr
   enable_dns_hostnames = true
   enable_dns_support   = true
-  tags = { Name = "${var.project}-vpc" }
+  tags                 = { Name = "${var.project}-vpc" }
 }
 
 resource "aws_internet_gateway" "this" {
@@ -83,7 +121,7 @@ resource "aws_route_table_association" "private" {
 }
 
 # ---- Outputs ----
-output "vpc_id"          { value = aws_vpc.this.id }
-output "public_subnets"  { value = aws_subnet.public[*].id }
+output "vpc_id" { value = aws_vpc.this.id }
+output "public_subnets" { value = aws_subnet.public[*].id }
 output "private_subnets" { value = aws_subnet.private[*].id }
-output "azs"             { value = var.azs }
+output "azs" { value = var.azs }
