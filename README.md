@@ -471,4 +471,4 @@ Run these commands from the Terraform root module after initialization. Review b
 
 ## License
 
-No open-source license is specified yet. Add a `LICENSE` file if you intend to publish this project under a particular open-source 
+No open-source license is specified yet. Add a `LICENSE` file if you intend to publish this project under a particular open-source license.
