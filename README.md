@@ -1,4 +1,4 @@
-
+g
 # HA 3-Tier AWS Platform
 
 A Terraform-based AWS infrastructure project that demonstrates how to design, provision, and manage a highly available, scalable, and secure three-tier application platform using Infrastructure as Code (IaC).
